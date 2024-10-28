@@ -15,3 +15,17 @@ dx serve --hot-reload
 ```
 
 - Open the browser to <http://localhost:8080>
+
+## Desktop
+
+To add desktop support, add the following to the `Cargo.toml` file:
+
+```toml
+dioxus = { ... , features = ["desktop"] }
+```
+
+Run the following command in the root of the project to start the Dioxus desktop app:
+
+```bash
+dx serve --platform desktop
+```

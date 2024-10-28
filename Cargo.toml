@@ -9,7 +9,7 @@ edition = "2021"
 
 [dependencies]
 daisy_rsx = "0.1.6"
-dioxus = { git = "https://github.com/DioxusLabs/dioxus", rev = "3f8c32d1ff638eb8c02afcb3bfd971b7d9e117ed", features = ["web", "router"] }
+dioxus = { git = "https://github.com/DioxusLabs/dioxus", rev = "09066dd334adfbe14da94faf789dde0561880c3d", features = ["web", "router"] }
 manganis = "0.2.2"
 
 # Debug

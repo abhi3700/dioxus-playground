@@ -21,12 +21,6 @@ pub(crate) fn Counter(id: i32) -> Element {
                     onclick: move |_| count += 1,
                     "Like 👍"
                 }
-                // Button {
-                // 	button_scheme: Some(daisy_rsx::ButtonScheme::Primary),
-                // 	button_size: Some(daisy_rsx::ButtonSize::Medium),
-                // 	button_type: Some(daisy_rsx::ButtonType::Submit),
-                // 	children: rsx! { "Like 👍" }
-                // }
                 // Using tailwind CSS
                 button {
                     class: "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2",
@@ -62,14 +56,18 @@ struct Names {
 fn Workouts(Names { name, color }: Names) -> Element {
     let mut count = use_signal(|| 0);
 
+    let bg_class = match color {
+        "red" => "bg-red-300",
+        "blue" => "bg-blue-300",
+        "green" => "bg-green-300",
+        _ => "bg-gray-300", // Fallback color
+    };
+
     rsx! {
         button {
             // NOTE: class & style doesn't work together in terms of expected UI.
             // style: format!("background-color: {}", color),
-            class: format!(
-                "bg-{}-300 hover:bg-gray-400 py-1.5 px-5 rounded-md hover:text-gray-50",
-                color,
-            ),
+            class: format!("{} hover:bg-gray-400 py-1.5 px-5 rounded-md hover:text-gray-50", bg_class),
             onclick: move |_| count += 1,
             "Workout by {name} for days: {count} "
         }
