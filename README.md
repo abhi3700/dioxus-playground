@@ -29,3 +29,14 @@ Run the following command in the root of the project to start the Dioxus desktop
 ```bash
 dx serve --platform desktop
 ```
+
+## Format
+
+> Do this before committing your changes.
+
+```sh
+# 1. Format the Rust, documentation and comments code
+cargo fmt
+# 2. Format the Dioxus code
+dx fmt
+```
