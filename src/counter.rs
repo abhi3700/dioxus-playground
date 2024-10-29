@@ -40,15 +40,21 @@ pub(crate) fn Counter(id: i32) -> Element {
                 }
             }
         }
+        hr { class: "my-2" }
+
         div { class: "flex gap-2 p-2",
             {
-                [("Alice", "red"), ("Bob", ""), ("Charlie", "green")].iter().map(|&(name, color)| {
-                    println!("color: {}", color);
-                    rsx! { Workouts { name, color } }
-                })
+                [("Alice", "red"), ("Bob", ""), ("Charlie", "green")]
+                    .iter()
+                    .map(|&(name, color)| {
+                        println!("color: {}", color);
+                        rsx! {
+                            Workouts { name, color }
+                        }
+                    })
             }
         }
-
+        hr { class: "my-2" }
         div { class: "flex flex-col gap-2 p-2 bg-gray-100",
             label { class: "font-mono text-gray-800", "Email" }
             div { class: "flex gap-2",
@@ -59,7 +65,7 @@ pub(crate) fn Counter(id: i32) -> Element {
                     oninput: move |e| {
                         let value = e.value();
                         email.set(value.to_string());
-                    }
+                    },
                 }
                 button {
                     class: "bg-red-500 hover:bg-red-600 py-1 px-2 text-3xl rounded-md shadow-lg text-white",

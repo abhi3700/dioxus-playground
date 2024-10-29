@@ -18,7 +18,6 @@
 use crate::Route;
 use dioxus::prelude::*;
 
-#[component]
 pub(crate) fn SharingState() -> Element {
     rsx! {
         div { class: "p-2 gap-2",
@@ -34,12 +33,12 @@ pub(crate) fn SharingState() -> Element {
             }
             hr { class: "my-2" }
             Link { to: Route::SharingStateLifting {},
-                button { class: "bg-blue-200 hover:bg-blue-300 py-1.5 px-5 rounded-md mr-2",
+                button { class: "bg-blue-200 hover:bg-blue-300 py-1.5 px-5 rounded-md mr-2 shadow-lg",
                     "Lifting"
                 }
             }
             Link { to: Route::SharingStateContext {},
-                button { class: "bg-green-200 hover:bg-green-300 py-1.5 px-5 rounded-md",
+                button { class: "bg-green-200 hover:bg-green-300 py-1.5 px-5 rounded-md shadow-lg",
                     "Context"
                 }
             }
@@ -65,7 +64,7 @@ fn ThumbnailEditor() -> Element {
         div { class: "flex flex-col gap-2",
             p { class: "text-2xl font-bold text-gray-700 font-mono", "Thumbnail Editor ✍️" }
             Thumbnail { title }
-            TitleEditor { title, oninput: move |e: FormEvent| title.set(e.value().to_string()) }
+            TitleEditor { title, oninput: move |e: FormEvent| title.set(e.value()) }
         }
     }
 }
@@ -91,7 +90,7 @@ fn TitleEditor(title: String, oninput: EventHandler<FormEvent>) -> Element {
         input {
             class: "border-2 border-gray-300 rounded-md p-2 max-w-[400px]",
             value: "{title}",
-            oninput: move |e| oninput.call(e)
+            oninput: move |e| oninput.call(e),
         }
     }
 }
@@ -131,7 +130,6 @@ fn ThumbnailEditor2() -> Element {
 
 /// Thumbnail title component
 /// It is using the updated title from the parent component `ThumbnailEditor`.
-#[component]
 fn Thumbnail2() -> Element {
     let thumbnail_info = use_context::<Signal<ThumbnailInfo>>();
 
@@ -154,7 +152,7 @@ fn TitleEditor2() -> Element {
         input {
             class: "border-2 border-gray-300 rounded-md p-2 max-w-[400px]",
             value: "{thumbnail_info().title}",
-            oninput: move |e| thumbnail_info.write().title = e.value().to_string()
+            oninput: move |e| thumbnail_info.write().title = e.value(),
         }
     }
 }

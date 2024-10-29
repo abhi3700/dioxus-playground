@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 
+mod async_await;
 mod blog;
 mod counter;
 mod faq;
@@ -7,6 +8,7 @@ mod home;
 mod sharing_state;
 
 use crate::manganis;
+use async_await::Async;
 use blog::{Blog, Toi, Tribune};
 use counter::Counter;
 use dioxus::prelude::*;
@@ -36,6 +38,8 @@ enum Route {
     SharingStateLifting,
     #[route("/sharingstate/context")]
     SharingStateContext,
+    #[route("/async")]
+    Async,
 }
 
 // Urls are relative to your Cargo.toml file
