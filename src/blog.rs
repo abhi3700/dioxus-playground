@@ -25,9 +25,9 @@ pub(crate) fn Blog() -> Element {
 		hr { style: "border: 1px solid #1F2937" }
 		h3 { style: "color: #1F2937; font-weight: bold", "Categories" }
 		{
-		    vec!["Entertainment", "Sports", "Politics", "Business", "Technology", "Science"]
-		        .iter()
-		        .map(|cat| rsx! {
+			vec!["Entertainment", "Sports", "Politics", "Business", "Technology", "Science"]
+				.iter()
+				.map(|cat| rsx! {
 			li { class: "text-blue-800 hover:underline p-2", "{cat}" }
 		})
 		}
@@ -67,9 +67,9 @@ pub(crate) fn Toi() -> Element {
 		button {
 			class: "bg-blue-200 hover:bg-blue-300 py-1.5 px-5 rounded-md",
 			onclick: move |_| {
-			    expanded.set(!expanded());
-			    dbg!("{:?}", expanded());
-			    needs_update();
+				expanded.toggle();
+				dbg!("{:?}", expanded());
+				needs_update();
 			},
 			if expanded() {
 				"Collapse 🗞️"
