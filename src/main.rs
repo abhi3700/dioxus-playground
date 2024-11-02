@@ -5,6 +5,7 @@ mod blog;
 mod counter;
 mod faq;
 mod home;
+mod img_gen;
 mod sharing_state;
 
 use crate::manganis;
@@ -15,6 +16,7 @@ use dioxus::prelude::*;
 use dioxus_logger::tracing::{info, Level};
 use faq::Faq;
 use home::Home;
+use img_gen::ImgGen;
 use sharing_state::{SharingState, SharingStateContext, SharingStateLifting};
 
 /// One global route for the entire App.
@@ -40,6 +42,8 @@ enum Route {
 	SharingStateContext,
 	#[route("/async")]
 	Async,
+	#[route("/imggen")]
+	ImgGen,
 }
 
 // Urls are relative to your Cargo.toml file
@@ -49,6 +53,8 @@ fn main() {
 	// Init logger
 	dioxus_logger::init(Level::INFO).expect("failed to init logger");
 	info!("starting app");
+
+	dotenv::dotenv().ok();
 	launch(App);
 }
 
