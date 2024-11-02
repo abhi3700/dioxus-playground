@@ -53,8 +53,6 @@ fn main() {
 	// Init logger
 	dioxus_logger::init(Level::INFO).expect("failed to init logger");
 	info!("starting app");
-
-	dotenv::dotenv().ok();
 	launch(App);
 }
 

@@ -15,14 +15,14 @@ npx tailwindcss -i ./input.css -o ./assets/tailwind.css --watch
 Run the following command in the root of the project to start the Dioxus dev server:
 
 ```bash
-dx serve --hot-reload true
+LMWR_API_KEY="..." dx serve --hot-reload true
 ```
 
 - Open the browser to <http://localhost:8080> by pressing [o] key in the terminal.
 
 ## Desktop
 
-To add desktop support, add the following to the `Cargo.toml` file:
+To add desktop support, add "desktop" feature to the existing features in the `Cargo.toml` file for dioxus dependency:
 
 ```toml
 dioxus = { ... , features = ["desktop"] }
@@ -31,7 +31,7 @@ dioxus = { ... , features = ["desktop"] }
 Run the following command in the root of the project to start the Dioxus desktop app:
 
 ```bash
-dx serve --platform desktop
+LMWR_API_KEY="..." dx serve --platform desktop
 ```
 
 ## Format

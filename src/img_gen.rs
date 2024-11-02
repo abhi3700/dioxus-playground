@@ -1,9 +1,8 @@
+use crate::Route;
 use dioxus::prelude::*;
 use dioxus_logger::tracing::info;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
-
-use crate::Route;
 
 pub(crate) fn ImgGen() -> Element {
 	let mut loading = use_signal(|| false);
@@ -17,7 +16,6 @@ pub(crate) fn ImgGen() -> Element {
 			loading.set(true);
 			match generate_images_limewire(prompt).await {
 				Ok(response) => {
-					loading.set(false);
 					image.set(response);
 				},
 				Err(e) => {
@@ -26,6 +24,7 @@ pub(crate) fn ImgGen() -> Element {
 				},
 			}
 		}
+		loading.set(false);
 	});
 
 	rsx! {
@@ -45,7 +44,7 @@ pub(crate) fn ImgGen() -> Element {
 				class: "w-full border-2 border-gray-300 rounded-md p-2 mb-2",
 				placeholder: "Enter a prompt (e.g. 'A beautiful woman with long blonde hair')",
 				oninput: move |e| prompt.set(e.value()),
-				value: "{prompt}"
+				value: "{prompt}",
 			}
 			button {
 				class: "bg-purple-200 hover:bg-purple-300 py-1.5 px-5 rounded-md shadow-md",
@@ -59,7 +58,7 @@ pub(crate) fn ImgGen() -> Element {
 				ImageDisplay { images: image().data }
 			}
 			if let Some(error) = error() {
-				div { class: "text-red-500", "{error}" }
+				ErrorAlert { error }
 			}
 		}
 	}
@@ -85,6 +84,29 @@ fn LoadingIndicator() -> Element {
 }
 
 #[component]
+fn ErrorAlert(error: String) -> Element {
+	rsx! {
+		div {
+			class: "flex items-center p-4 mt-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800",
+			role: "alert",
+			svg {
+				class: "flex-shrink-0 inline w-4 h-4 me-3",
+				// aria_hidden: "true",
+				xmlns: "http://www.w3.org/2000/svg",
+				fill: "currentColor",
+				view_box: "0 0 20 20",
+				path { d: "M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" }
+			}
+			span { class: "sr-only", "Info" }
+			div {
+				span { class: "font-medium", "Error: " }
+				"{error}"
+			}
+		}
+	}
+}
+
+#[component]
 fn ImageDisplay(images: Vec<ImageAssetInfo>) -> Element {
 	rsx! {
 		div { class: "flex flex-wrap gap-4",
@@ -96,9 +118,12 @@ fn ImageDisplay(images: Vec<ImageAssetInfo>) -> Element {
 }
 
 // LimeWire API
+#[allow(dead_code, unused_variables)]
 async fn generate_images_limewire(prompt: String) -> Result<ImageResponse, reqwest::Error> {
-	// dotenv::dotenv().ok();
-	let lmwr_api_key = std::env::var("LMWR_API_KEY").expect("LMWR_API_KEY must be set");
+	dotenv::dotenv().ok();
+	// NOTE: Just run `LMWR_API_KEY=".." dx serve` to set this. So, the value is captured at compile
+	// time.
+	let lmwr_api_key = std::env!("LMWR_API_KEY");
 	let client: reqwest::Client = reqwest::Client::new();
 
 	let payload = json!({

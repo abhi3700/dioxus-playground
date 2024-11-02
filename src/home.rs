@@ -19,7 +19,7 @@ pub(crate) fn Home() -> Element {
 					img {
 						src: "https://flowbite.com/docs/images/logo.svg",
 						class: "h-8",
-						alt: "Flowbite Logo"
+						alt: "Flowbite Logo",
 					}
 					span { class: "self-center text-2xl font-semibold whitespace-nowrap dark:text-white",
 						"Home"
@@ -55,7 +55,7 @@ pub(crate) fn Home() -> Element {
 								"stroke-linecap": "round",
 								"stroke-linejoin": "round",
 								"stroke-width": "2",
-								d: "M1 1h15M1 7h15M1 13h15"
+								d: "M1 1h15M1 7h15M1 13h15",
 							}
 						}
 					}
@@ -64,8 +64,8 @@ pub(crate) fn Home() -> Element {
 				// Navbar links for desktop and mobile
 				div {
 					class: format_args!(
-					    "{} items-center justify-between w-full md:flex md:w-auto md:order-1",
-					    if is_menu_open() { "" } else { "hidden" },
+						"{} items-center justify-between w-full md:flex md:w-auto md:order-1",
+						if is_menu_open() { "" } else { "hidden" },
 					),
 					id: "navbar-sticky",
 					ul { class: "flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700",
