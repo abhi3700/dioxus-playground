@@ -4,6 +4,6 @@ fn main() {
 		// Inject the environment variable as a compile-time constant
 		// println!("cargo:rustc-env=LMWR_API_KEY={}", api_key);
 	} else {
-		panic!("LMWR_API_KEY environment variable must be set at compile time.");
+		panic!("'LMWR_API_KEY' environment variable must be set at compile time.");
 	}
 }

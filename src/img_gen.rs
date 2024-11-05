@@ -44,7 +44,7 @@ pub(crate) fn ImgGen() -> Element {
 				class: "w-full border-2 border-gray-300 rounded-md p-2 mb-2",
 				placeholder: "Enter a prompt (e.g. 'A beautiful woman with long blonde hair')",
 				oninput: move |e| prompt.set(e.value()),
-				value: "{prompt}",
+				value: "{prompt}"
 			}
 			button {
 				class: "bg-purple-200 hover:bg-purple-300 py-1.5 px-5 rounded-md shadow-md",
@@ -120,7 +120,6 @@ fn ImageDisplay(images: Vec<ImageAssetInfo>) -> Element {
 // LimeWire API
 #[allow(dead_code, unused_variables)]
 async fn generate_images_limewire(prompt: String) -> Result<ImageResponse, reqwest::Error> {
-	dotenv::dotenv().ok();
 	// NOTE: Just run `LMWR_API_KEY=".." dx serve` to set this. So, the value is captured at compile
 	// time.
 	let lmwr_api_key = std::env!("LMWR_API_KEY");
