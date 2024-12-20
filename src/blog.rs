@@ -1,6 +1,6 @@
 //! Blog page
 
-use crate::Route;
+use crate::{manganis, Route};
 use dioxus::prelude::*;
 
 #[component]
@@ -34,8 +34,7 @@ pub(crate) fn Blog() -> Element {
 	}
 }
 
-use crate::manganis;
-static ASSET_PATH: &str = asset!("assets/tribune-logo.jpg");
+static ASSET_PATH: Asset = asset!("assets/tribune-logo.jpg");
 
 #[component]
 pub(crate) fn Tribune() -> Element {

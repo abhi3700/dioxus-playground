@@ -47,7 +47,7 @@ enum Route {
 }
 
 // Urls are relative to your Cargo.toml file
-const STYLE: &str = asset!("assets/tailwind.css");
+const STYLE: Asset = asset!("assets/tailwind.css");
 
 fn main() {
 	// Init logger

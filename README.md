@@ -2,37 +2,38 @@
 
 My playground for Dioxus.
 
-## Web
+---
 
-1. Install npm: <https://docs.npmjs.com/downloading-and-installing-node-js-and-npm>
-2. Install the tailwind css cli: <https://tailwindcss.com/docs/installation>
-3. Run the following command in the root of the project to start the tailwind CSS compiler:
+**Activate Tailwind CSS**:
 
-```bash
+1. `$ npm install -g tailwindcss`.
+2. Run the following command in the root of the project to start the tailwind CSS compiler:
+
+```sh
 npx tailwindcss -i ./input.css -o ./assets/tailwind.css --watch
 ```
 
-Run the following command in the root of the project to start the Dioxus dev server:
+## Web
 
-```bash
-LMWR_API_KEY="..." dx serve --hot-reload true
+```sh
+LMWR_API_KEY="..." dx serve
 ```
 
 - Open the browser to <http://localhost:8080> by pressing [o] key in the terminal.
 
 ## Desktop
 
-To add desktop support, add "desktop" feature to the existing features in the `Cargo.toml` file for dioxus dependency:
-
-```toml
-dioxus = { ... , features = ["desktop"] }
-```
-
-Run the following command in the root of the project to start the Dioxus desktop app:
-
-```bash
+```sh
 LMWR_API_KEY="..." dx serve --platform desktop
 ```
+
+## iOS
+
+```sh
+LMWR_API_KEY="..." dx serve --platform ios
+```
+
+Open [VSCode extension](https://marketplace.cursorapi.com/items?itemName=DiemasMichiels.emulate)'s emulator from Command palette & choose a device.
 
 ## Format
 
