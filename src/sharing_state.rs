@@ -3,8 +3,9 @@
 //! This example is showing how to share state between components between parent and child
 //! components.
 //!
-//! Here, the `ThumbnailEditor` is the parent component and the `Thumbnail` and `TitleEditor` are
-//! the child components.
+//! Here, the `ThumbnailEditor` is the parent component with its child components:
+//! - `Thumbnail`
+//! - `TitleEditor`
 //!
 //! The `TitleEditor` is using the event from it to make the title change to edited title in the
 //! parent component `ThumbnailEditor`. And the `Thumbnail` is using the updated title from the
@@ -19,6 +20,8 @@
 //!     - Used when there is a deep component tree with many components needing access to the same
 //!       state.
 //!     - More cleaner and easier to maintain.
+//!
+//! NOTE: We use `#[component]` for the child components that too if we have any function params.
 
 use crate::Route;
 use dioxus::prelude::*;
@@ -120,7 +123,7 @@ struct ThumbnailInfo {
 fn ThumbnailEditor2() -> Element {
 	use_context_provider(|| {
 		Signal::new(ThumbnailInfo {
-			// default value
+			// initial value
 			title: "Openheimer 🎥💣💥".to_string(),
 		})
 	});
@@ -150,7 +153,6 @@ fn Thumbnail2() -> Element {
 /// Title editor component
 /// It is using (calling) the event from here to make the title change to edited title in the parent
 /// component `ThumbnailEditor`
-#[component]
 fn TitleEditor2() -> Element {
 	let mut thumbnail_info = use_context::<Signal<ThumbnailInfo>>();
 

@@ -2,7 +2,9 @@
 
 My playground for Dioxus.
 
----
+## [Cookbook](./cookbook/)
+
+--- 🧑‍💻 ---
 
 **Activate Tailwind CSS**:
 
@@ -50,7 +52,7 @@ dx fmt
 
 ## Deploy
 
-1. Bundle your project for Web (say) platform via `$ LMWR_API_KEY="..." dx bundle --platform web`.
+1. Bundle your project for Web (say) platform via `$ LMWR_API_KEY="..." dx bundle -r --platform web`.
 2. `$ netlify status` or `$ netlify login` to check your status or login.
 3. Go to the output directory i.e. `$ cd target/dx/playg/release/web/public`.
 4. Create site on Netlify via `$ netlify sites:create` if you want to go w/o CI/CD pipeline or share github public repo url.

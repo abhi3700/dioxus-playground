@@ -23,6 +23,7 @@ use crate::{
 };
 use async_std::stream::StreamExt;
 use dioxus::prelude::*;
+use global_attributes::is;
 use std::{fmt::Display, time::Duration};
 
 pub(crate) fn Async() -> Element {
@@ -54,7 +55,7 @@ pub(crate) fn Async() -> Element {
 
 /// In this, on clicking the button, the main thread is blocked for 3 seconds. And then the button
 /// comes back.
-pub(crate) fn Example1() -> Element {
+fn Example1() -> Element {
 	let mut is_clicked = use_signal(|| false);
 
 	let handler = move |_| async move {
@@ -81,7 +82,9 @@ pub(crate) fn Example1() -> Element {
 /// Same as Example1, but we can add multiple concurrent tasks here. Also separate error handling.
 /// Here tasks should not be tied to any component lifecycle. For instance, fetching data from API
 /// is generally done outside of a component.
-pub(crate) fn Example2() -> Element {
+///
+/// NOTE: `spawn` is used when a button is clicked i.e. conditional run.
+fn Example2() -> Element {
 	let mut is_clicked = use_signal(|| false);
 
 	let handler = move |_| {
@@ -178,7 +181,10 @@ fn Example3() -> Element {
 /// Using `use_resource` hook to fetch data from API. Similar to `use_future`, but with caching
 /// and automatic reloading based on dependency changes.
 ///
-/// Personally, i would prefer this over `use_future` for API calls.
+/// NOTE: Personally, i would prefer this over `use_future` for API calls unless I want granular
+/// control like while editing Amount. Every digit entry might rerun the use_resource especially, if
+/// there is resource's dependency link to other state. like amount is linked to coin's decimals for
+/// formatting.
 fn Example4() -> Element {
 	let mut future = use_resource(|| async move {
 		async_std::task::sleep(Duration::from_secs(3)).await;
