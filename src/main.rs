@@ -3,6 +3,7 @@
 mod async_await;
 mod blog;
 mod counter;
+mod custom_dropdown;
 mod faq;
 mod home;
 mod img_gen;
@@ -12,6 +13,7 @@ use crate::manganis;
 use async_await::Async;
 use blog::{Blog, Toi, Tribune};
 use counter::Counter;
+use custom_dropdown::Foo;
 use dioxus::prelude::*;
 use dioxus_logger::tracing::{info, Level};
 use faq::Faq;
@@ -24,6 +26,8 @@ use sharing_state::{SharingState, SharingStateContext, SharingStateLifting};
 enum Route {
 	#[route("/")]
 	Home {},
+	#[route("/foo")]
+	Foo,
 	#[route("/blog")]
 	Blog {},
 	#[route("/blog/tribune")]
@@ -63,6 +67,15 @@ fn App() -> Element {
 		document::Link { rel: "icon", href: FAVICON }
 		document::Link { rel: "stylesheet", href: MAIN_CSS }
 		document::Link { rel: "stylesheet", href: TAILWIND_CSS }
+		document::Link {
+			rel: "stylesheet",
+			href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css",
+		}
+		document::Link {
+			rel: "stylesheet",
+			// href: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
+			href: "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css",
+		}
 		Router::<Route> {}
 	}
 }
